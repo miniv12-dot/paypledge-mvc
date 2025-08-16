@@ -123,7 +123,7 @@ namespace PayPledge.Services
         {
             try
             {
-                var query = $"SELECT * FROM `{_bucketName}` WHERE type = 'user' AND email = $email";
+                var query = $"SELECT u.* FROM `{_bucketName}`._default._default u WHERE type = 'user' AND email = $email";
                 var parameters = new { email = email.ToLowerInvariant() };
 
                 var users = await _userRepository.FindAsync(query, parameters);

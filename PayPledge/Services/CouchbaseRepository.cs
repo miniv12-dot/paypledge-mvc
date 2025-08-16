@@ -98,7 +98,9 @@ namespace PayPledge.Services
                 // Extract ID from entity using reflection or JSON
                 var json = JsonConvert.SerializeObject(entity);
                 var doc = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-                var id = doc?["id"]?.ToString() ?? Guid.NewGuid().ToString();
+                var id = doc?["email"]?.ToString().ToLowerInvariant()
+          ?? Guid.NewGuid().ToString();
+
 
                 await collection.InsertAsync(id, entity);
                 return id;

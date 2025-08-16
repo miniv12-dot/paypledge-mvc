@@ -35,9 +35,9 @@ builder.Services.AddSignalR();
 // Configure Couchbase
 builder.Services.AddSingleton<ICluster>(serviceProvider =>
 {
-    var connectionString = builder.Configuration["Couchbase:ConnectionString"] ?? "couchbase://localhost";
-    var username = builder.Configuration["Couchbase:Username"] ?? "Administrator";
-    var password = builder.Configuration["Couchbase:Password"] ?? "password";
+    var connectionString = builder.Configuration["Couchbase:ConnectionString"] ?? "couchbases://cb.aiqy7ljtpwu35jrz.cloud.couchbase.com";
+    var username = builder.Configuration["Couchbase:Username"] ?? "PayPledge";
+    var password = builder.Configuration["Couchbase:Password"] ?? "SecurePayH@ch25";
 
     var options = new ClusterOptions()
         .WithConnectionString(connectionString)
