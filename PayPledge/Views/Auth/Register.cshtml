@@ -1,0 +1,148 @@
+@model PayPledge.Controllers.RegisterViewModel
+@{
+    ViewData["Title"] = "Register - PayPledge";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold text-primary">Join PayPledge</h2>
+                    <p class="text-muted">Create your account to start secure trading</p>
+                </div>
+
+                <form asp-action="Register" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label asp-for="FirstName" class="form-label"></label>
+                            <input asp-for="FirstName" class="form-control" placeholder="Enter first name" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="LastName" class="form-label"></label>
+                            <input asp-for="LastName" class="form-control" placeholder="Enter last name" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" placeholder="Enter email address" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label"></label>
+                        <input asp-for="Password" class="form-control"
+                            placeholder="Create password (min 6 characters)" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ConfirmPassword" class="form-label"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm password" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Role" class="form-label">I want to:</label>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input asp-for="Role" class="form-check-input" type="radio" value="Buyer"
+                                        id="roleBuyer" />
+                                    <label class="form-check-label" for="roleBuyer">
+                                        <i class="fas fa-shopping-cart text-primary"></i> Buy
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input asp-for="Role" class="form-check-input" type="radio" value="Seller"
+                                        id="roleSeller" />
+                                    <label class="form-check-label" for="roleSeller">
+                                        <i class="fas fa-store text-success"></i> Sell
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input asp-for="Role" class="form-check-input" type="radio" value="Both"
+                                        id="roleBoth" />
+                                    <label class="form-check-label" for="roleBoth">
+                                        <i class="fas fa-exchange-alt text-info"></i> Both
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Role" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                    </div>
+                </form>
+
+                <div class="text-center mt-4">
+                    <p class="text-muted">
+                        Already have an account?
+                        <a asp-action="Login" class="text-decoration-none">Sign in here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <small class="text-muted">
+                By creating an account, you agree to our
+                <a href="#" class="text-decoration-none">Terms of Service</a> and
+                <a href="#" class="text-decoration-none">Privacy Policy</a>
+            </small>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        // Add some interactivity to role selection
+        document.querySelectorAll('input[name="Role"]').forEach(radio => {
+            radio.addEventListener('change', function () {
+                // Remove active class from all labels
+                document.querySelectorAll('.form-check-label').forEach(label => {
+                    label.classList.remove('text-primary', 'fw-bold');
+                });
+
+                // Add active class to selected label
+                if (this.checked) {
+                    this.nextElementSibling.classList.add('fw-bold');
+                }
+            });
+        });
+    </script>
+}
+
+<style>
+    .form-check-label {
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 0.375rem;
+        transition: all 0.2s;
+    }
+
+    .form-check-label:hover {
+        background-color: #f8f9fa;
+    }
+
+    .form-check-input:checked+.form-check-label {
+        background-color: #e3f2fd;
+    }
+</style>
